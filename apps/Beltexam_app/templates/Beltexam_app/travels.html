@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Travels</title>
+	</head>
+	<body>
+		<a href='/logout' style="margin-right: 12px; float: right;">Logout</a>
+		<br>
+		<h1 style="display: inline-block;">Welcome, {{ active }}!</h1>
+		<br>
+		<p>Your Trip Schedules</p>
+		<table style="border: 2px solid black; border-collapse: collapse;">
+			<thead>
+				<tr style="background-color: silver;">
+					<td style="border-right: 2px solid black;">Destination</td>
+					<td style="border-right: 2px solid black;">Travel Start Date</td>
+					<td style="border-right: 2px solid black;">Travel End Date</td>
+					<td style="border-right: 2px solid black;">Plan</td>
+				</tr>
+			</thead>
+			<tbody>
+				{% for plan in plans %}
+					<tr>
+						<td style="border-right: 2px solid black;"><a href="/travels/destination/{{ plan.id }}">{{ plan.destination }}</a></td>
+						<td style="border-right: 2px solid black;">{{ plan.datefrom }}</td>
+						<td style="border-right: 2px solid black;">{{ plan.dateto }}</td>
+						<td style="border-right: 2px solid black;">{{ plan.desc }}</td>
+					</tr>
+				{% endfor %}
+				{% for new in joined %}
+					<tr>
+						<td style="border-right: 2px solid black;"><a href="/travels/destination/{{ new.id }}">{{ new.destination }}</a></td>
+						<td style="border-right: 2px solid black;">{{ new.datefrom }}</td>
+						<td style="border-right: 2px solid black;">{{ new.dateto }}</td>
+						<td style="border-right: 2px solid black;">{{ new.desc }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<br>
+		<br>
+		<p>Other User's Travel Plans</p>
+		<table style="border: 2px solid black; border-collapse: collapse;">
+			<thead>
+				<tr style="background-color: silver;">
+					<td style="border-right: 2px solid black;">Name</td>
+					<td style="border-right: 2px solid black;">Destination</td>
+					<td style="border-right: 2px solid black;">Travel Start Date</td>
+					<td style="border-right: 2px solid black;">Travel End Date</td>
+					<td style="border-right: 2px solid black;">Do you Want To Join?</td>
+				</tr>
+			</thead>
+			<tbody>
+				{% for join in others %}
+					<tr>
+						<td style="border-right: 2px solid black;">{{ join.created_by.username }}</td>
+						<td style="border-right: 2px solid black;"><a href="/travels/destination/{{ join.id }}">{{ join.destination }}</a></td>
+						<td style="border-right: 2px solid black;">{{ join.datefrom }}</td>
+						<td style="border-right: 2px solid black;">{{ join.dateto }}</td>
+						<td><a href="/jointrip/{{ join.id }}" style="margin-left: 12px;">Join</a></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<br>
+		<a href='/travels/add' style="margin-right: 12px; float: right;">Add Travel Plan</a>
+	</body>
+</html>

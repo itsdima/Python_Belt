@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Details</title>
+	</head>
+	<body>
+		<div style="float: right; margin-right: 15px;">
+			<a href="/travels">Home</a> &nbsp; &nbsp; <a href="/logout">Logout</a>
+		</div>
+		<div>
+			<h1>{{ info.destination }}</h1>
+			<p style="margin-left: 15px;">Planned By: {{ info.created_by.name }}</p>
+			<p style="margin-left: 15px;">Description: {{ info.desc }}</p>
+			<p style="margin-left: 15px;">Travel Date From: {{ info.datefrom }}</p>
+			<p style="margin-left: 15px;">Travel Date To: {{ info.dateto }}</p>
+		</div>
+		<div style="margin-top: 25px;">
+			<h2>Other Users joining the trip:</h2>
+			{% for each in joinedby %}
+			<p style="margin-left: 15px;">{{ each.name }}</p>
+			{% endfor %}
+		</div>
+	</body>
+</html>
